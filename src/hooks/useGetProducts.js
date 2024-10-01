@@ -8,7 +8,7 @@ function useGetProducts() {
   const [filtredProduct, setFiltredProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const category = searchParams?.get("category");
   const brand = searchParams?.get("brand");
