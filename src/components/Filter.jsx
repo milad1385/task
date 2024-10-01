@@ -20,7 +20,7 @@ function Filter({ options, field }) {
     <select
       value={searchParams.get(field) || ""}
       onChange={handleChange}
-      className="w-full md:w-[200px] p-2 rounded-md"
+      className="w-full md:w-[200px] p-2 rounded-md bg-white"
     >
       <option value="">Choose {field} ...</option>
       {options.map((item) => (
