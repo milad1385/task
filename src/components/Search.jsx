@@ -5,7 +5,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState(searchParams.get("q"));
   const handleSearch = useDebouncedCallback((value) => {
     if (value.trim()) {
       searchParams.set("q", value.trim());

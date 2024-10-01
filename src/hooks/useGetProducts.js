@@ -14,6 +14,7 @@ function useGetProducts() {
   const brand = searchParams?.get("brand");
   const price = searchParams?.get("price");
   const search = searchParams?.get("q");
+  let page = searchParams.get("page") || 1;
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -21,9 +22,14 @@ function useGetProducts() {
       const res = await fetch(`${BASE_URL}/products`);
       const result = await res.json();
       setIsLoading(false);
+
+      let endIndex = 10 * Number(page);
+      let startIndex = endIndex - 10;
+      let paginatedItems = result.slice(startIndex, endIndex);
+
       setProducts(result);
 
-      applyFilter(result);
+      applyFilter(paginatedItems);
     };
 
     getAllProducts();
@@ -31,7 +37,7 @@ function useGetProducts() {
 
   useEffect(() => {
     applyFilter(products);
-  }, [category, brand, price , search, products]);
+  }, [category, brand, price, search, products]);
 
   const applyFilter = (productsToFilter) => {
     let filtered = productsToFilter;
@@ -58,8 +64,6 @@ function useGetProducts() {
 
     setFiltredProduct(filtered);
     setShownProducts(filtered);
-    searchParams.set("page", 1);
-    setSearchParams(searchParams);
   };
 
   return {

@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3500";
+export const BASE_URL = "https://api-task.liara.run";
 
 export const brands = ["raglan", "b&A", "Spring", "samsung", "western"];
 export const categories = [

@@ -36,11 +36,13 @@ function ProductList() {
       ) : (
         <EmptyError msg="Products not found Please try again" />
       )}
-      <Pagination
-        items={filtredProduct}
-        itemsCount={10}
-        setItems={setShownProducts}
-      />
+      {shownProducts && (
+        <Pagination
+          items={filtredProduct}
+          itemsCount={10}
+          setItems={setShownProducts}
+        />
+      )}
     </div>
   );
 }

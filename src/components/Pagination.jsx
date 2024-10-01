@@ -5,11 +5,12 @@ function Pagination({ items, itemsCount, setItems }) {
   let page = searchParams.get("page") || 1;
 
   useEffect(() => {
-    let endIndex = itemsCount * page || 1;
+    let endIndex = itemsCount * Number(page);
     let startIndex = endIndex - itemsCount;
     let paginatedItems = items.slice(startIndex, endIndex);
+
     setItems(paginatedItems);
-  }, [page , items]);
+  }, [page, items]);
 
   const handlePagination = (page) => {
     searchParams.set("page", page);

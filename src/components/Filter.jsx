@@ -7,8 +7,12 @@ function Filter({ options, field }) {
     if (e.target.value) {
       searchParams.set(field, e.target.value);
       setSearchParams(searchParams);
+      searchParams.set("page", 1);
+      setSearchParams(searchParams);
     } else {
       searchParams.delete(field);
+      setSearchParams(searchParams);
+      searchParams.set("page", 1);
       setSearchParams(searchParams);
     }
   };
