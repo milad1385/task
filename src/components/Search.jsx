@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useSearchParams } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 
-function Search() {
+function Search({ searchValue, onSearch }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchValue, setSearchValue] = useState(searchParams.get("q") || "");
-
-  const category = searchParams?.get("category");
-  const brand = searchParams?.get("brand");
-  const price = searchParams?.get("price");
-
   const handleSearch = useDebouncedCallback((value) => {
     if (value.trim()) {
       searchParams.set("q", value.trim());
+      searchParams.set("page", 1);
     } else {
       searchParams.delete("q");
     }
     setSearchParams(searchParams);
   }, 300);
 
-  useEffect(() => {
-    setSearchValue("");
-    searchParams.delete("q");
-    setSearchParams(searchParams);
-  }, [category, brand, price]);
   return (
     <div className="flex items-center justify-between bg-white py-2 px-4 w-full md:w-[400px] rounded-md">
       <input
@@ -32,7 +22,7 @@ function Search() {
         placeholder="Search Product by Title or description"
         className="bg-transparent placeholder:text-black outline-none border-none w-full text-sm md:text-base"
         onChange={(e) => {
-          setSearchValue(e.target.value);
+          onSearch(e.target.value);
           handleSearch(e.target.value);
         }}
       />
